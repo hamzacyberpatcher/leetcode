@@ -12,19 +12,43 @@ class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
 
-        ListNode* curr = head,* prev = nullptr, *next;
+        // iterative approach
+
+        // ListNode* curr = head,* prev = nullptr, *next;
+
+        // while(curr != nullptr)
+        // {
+        //     next = curr->next;
+
+        //     curr->next = prev;
+
+        //     prev = curr;
+        //     curr = next;
+        // }
+
+        // return prev;
+        
+        // stack based approach
+
+        stack<int> s;
+
+        ListNode* curr = head;
 
         while(curr != nullptr)
         {
-            next = curr->next;
-
-            curr->next = prev;
-
-            prev = curr;
-            curr = next;
+            s.push(curr->val);
+            curr = curr->next;
         }
 
-        return prev;
-        
+        curr = head;
+
+        while(curr != nullptr)
+        {
+            curr->val = s.top();
+            s.pop();
+            curr = curr->next;
+        }
+
+        return head;
     }
 };
